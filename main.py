@@ -1,28 +1,70 @@
 import streamlit as st
 
-# 앱의 제목 설정
-st.title('AI 소요기획과정')
+# 세션 상태 관리를 위한 함수
+def init_state():
+    if 'page' not in st.session_state:
+        st.session_state['page'] = 'home'
 
-# 메인 이미지 및 버튼 클릭 이벤트 처리
-if st.button('메인 이미지'):
+# 홈 페이지
+def render_home():
+    st.title('AI 소요기획과정')
+    if st.button('메인 이미지'):
+        st.session_state['page'] = 'menu'
+
+# 메뉴 페이지
+def render_menu():
     st.header('메뉴 선택')
-    # 메뉴 버튼 생성
     if st.button('머신러닝'):
-        st.subheader('머신러닝')
-        if st.button('결정트리'):
-            st.write('결정트리 관련 내용 표시')
-        if st.button('SVM'):
-            st.write('SVM 관련 내용 표시')
-        
-    if st.button('딥러닝'):
-        st.subheader('딥러닝')
-        if st.button('CNN'):
-            st.write('CNN 관련 내용 표시')
-        if st.button('RNN'):
-            st.write('RNN 관련 내용 표시')
-        
-    if st.button('실습'):
-        st.subheader('실습 관련 내용 표시')
+        st.session_state['page'] = 'ml'
+    elif st.button('딥러닝'):
+        st.session_state['page'] = 'dl'
+    elif st.button('실습'):
+        st.session_state['page'] = 'practice'
+    elif st.button('홈으로'):
+        st.session_state['page'] = 'home'
 
-# 이 부분에 달리를 통해 생성된 이미지를 삽입할 수 있습니다.
-# 예를 들어, st.image('path/to/image.png') 함수를 사용하면 됩니다.
+# 머신러닝 페이지
+def render_ml():
+    st.subheader('머신러닝')
+    if st.button('결정트리'):
+        st.write('결정트리 관련 내용 표시')
+    elif st.button('SVM'):
+        st.write('SVM 관련 내용 표시')
+    elif st.button('이전 단계로'):
+        st.session_state['page'] = 'menu'
+    elif st.button('홈으로'):
+        st.session_state['page'] = 'home'
+
+# 딥러닝 페이지
+def render_dl():
+    st.subheader('딥러닝')
+    if st.button('CNN'):
+        st.write('CNN 관련 내용 표시')
+    elif st.button('RNN'):
+        st.write('RNN 관련 내용 표시')
+    elif st.button('이전 단계로'):
+        st.session_state['page'] = 'menu'
+    elif st.button('홈으로'):
+        st.session_state['page'] = 'home'
+
+# 실습 페이지
+def render_practice():
+    st.subheader('실습')
+    if st.button('이전 단계로'):
+        st.session_state['page'] = 'menu'
+    elif st.button('홈으로'):
+        st.session_state['page'] = 'home'
+
+# 앱의 메인 흐름 관리
+init_state()
+
+if st.session_state['page'] == 'home':
+    render_home()
+elif st.session_state['page'] == 'menu':
+    render_menu()
+elif st.session_state['page'] == 'ml':
+    render_ml()
+elif st.session_state['page'] == 'dl':
+    render_dl()
+elif st.session_state['page'] == 'practice':
+    render_practice()
