@@ -10,7 +10,7 @@ components.html(
     <html>
     <head>
     <title>vworld 지도 예제</title>
-    <script type="text/javascript" src="https://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=여러분의_API_키"></script>
+    <script type="text/javascript" src="https://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=02FEC135-0495-3479-A9D3-1398A00EDBA0"></script>
     </head>
     <body>
     <div id="vworldMap" style="width:100%;height:80vh;"></div>
